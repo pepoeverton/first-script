@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/evertonnunes/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -65,16 +65,17 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/evertonnunes/.composer/vendor/bin:/usr/local/go/bin"
+#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/evertonnunes/.composer/vendor/bin:/usr/local/go/bin"
+# temp
+export PATH=$PATH:/snap/bin
+# export PATH=/usr/local/bin:$PATH
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -117,21 +118,24 @@ alias gpu='git pull'
 alias gcl='git clone'
 alias gta='git tag -a -m'
 alias gf='git reflog'
+gls() {
+  git log --all --grep="$1"
+}
+
+# COMMON
+alias specs='neofetch'
+alias vpn='nordvpn'
 
 # my IP
 function myip() {
-	ifconfig lo0 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
-	ifconfig en0 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en0 | grep 'inet6 '  | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
-	ifconfig en1 | grep 'inet6 '  | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig lo0 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "lo0       : " $2}'
+  ifconfig en0 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "en0 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en0 | grep 'inet6 '  | sed -e 's/ / /' | awk '{print "en0 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet '   | sed -e 's/:/ /' | awk '{print "en1 (IPv4): " $2 " " $3 " " $4 " " $5 " " $6}'
+  ifconfig en1 | grep 'inet6 '  | sed -e 's/ / /' | awk '{print "en1 (IPv6): " $2 " " $3 " " $4 " " $5 " " $6}'
 }
 
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
